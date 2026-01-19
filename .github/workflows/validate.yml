@@ -1,0 +1,105 @@
+name: Workshop Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validate Workshops
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check workshop structure
+        run: |
+          echo "Validating workshop structure..."
+
+          # Required workshops
+          workshops=(
+            "ai-coding-agents"
+            "personal-ai-assistant-setup"
+            "mcp-server-mastery"
+            "prompt-engineering-mastery"
+            "suno-music-creation"
+            "creators-ai-toolkit"
+            "oracle-genai-enterprise"
+          )
+
+          for workshop in "${workshops[@]}"; do
+            if [ ! -d "$workshop" ]; then
+              echo "Missing workshop: $workshop"
+              exit 1
+            fi
+
+            if [ ! -f "$workshop/README.md" ]; then
+              echo "Missing README in: $workshop"
+              exit 1
+            fi
+
+            echo "Validated: $workshop"
+          done
+
+          echo "All workshops validated!"
+
+      - name: Validate README content
+        run: |
+          echo "Checking README quality..."
+
+          for readme in */README.md; do
+            echo "Checking $readme..."
+
+            # Check for required sections
+            if ! grep -q "## Learning Objectives\|## What You'll Learn" "$readme"; then
+              echo "Warning: $readme missing learning objectives"
+            fi
+
+            if ! grep -q "## Prerequisites\|## Requirements" "$readme"; then
+              echo "Warning: $readme missing prerequisites"
+            fi
+          done
+
+          echo "README validation complete!"
+
+      - name: Check for broken links
+        run: |
+          echo "Checking internal links..."
+
+          # Find markdown links and verify they exist
+          find . -name "*.md" -exec grep -l '\](./' {} \; | while read file; do
+            dir=$(dirname "$file")
+            grep -oP '\]\(\./[^)]+\)' "$file" 2>/dev/null | while read link; do
+              target=$(echo "$link" | sed 's/\](\.\///' | sed 's/)//')
+              if [ ! -e "$dir/$target" ] && [ ! -e "$dir/${target%/}" ]; then
+                echo "Potential broken link in $file: $target"
+              fi
+            done
+          done
+
+          echo "Link check complete!"
+
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint Markdown
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint
+        run: npm install -g markdownlint-cli
+
+      - name: Lint markdown files
+        run: |
+          markdownlint '**/*.md' \
+            --disable MD013 MD033 MD041 MD024 \
+            || echo "Some markdown lint warnings (non-blocking)"

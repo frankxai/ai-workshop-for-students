@@ -1,0 +1,52 @@
+name: Bug Report
+description: Report an issue with workshop content or code
+title: "[Bug]: "
+labels: ["bug", "triage"]
+
+body:
+  - type: dropdown
+    id: workshop
+    attributes:
+      label: Workshop
+      options:
+        - AI Coding Agents Mastery
+        - Personal AI Assistant Setup
+        - MCP Server Architecture
+        - Prompt Engineering Mastery
+        - Suno AI Music Creation
+        - Creator's AI Toolkit
+        - Oracle GenAI Enterprise
+        - Other / General
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      options:
+        - Code example doesn't work
+        - Broken link
+        - Outdated information
+        - Missing content
+        - Unclear instructions
+        - Typo
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: What's wrong? What did you expect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        - OS:
+        - Node version:
+        - Tool version:
