@@ -1,0 +1,156 @@
+{
+  "last_node_id": "18",
+  "last_link_id": "18",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "LoadImage",
+      "pos": [0, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": ["1"], "slot_index": 0 },
+        { "name": "MASK", "type": "MASK", "links": null, "slot_index": 1 }
+      ],
+      "properties": {
+        "image_load_type": "always",
+        "image": "input_image.jpg"
+      }
+    },
+    {
+      "id": "2",
+      "type": "LoadCheckpoint",
+      "pos": [300, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "MODEL", "type": "MODEL", "links": ["2"], "slot_index": 0 },
+        { "name": "CLIP", "type": "CLIP", "links": ["3"], "slot_index": 1 },
+        { "name": "VAE", "type": "VAE", "links": ["4"], "slot_index": 2 }
+      ],
+      "properties": {
+        "ckpt_name": "sdxl_base.safetensors"
+      }
+    },
+    {
+      "id": "3",
+      "type": "CLIPTextEncode",
+      "pos": [0, 200],
+      "size": { "0": 140, "1": 170 },
+      "flags": {},
+      "inputs": [
+        { "name": "clip", "type": "CLIP", "link": "3" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["5"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": [
+        "Digital art of the input image transformed into a watercolor painting, soft edges, pastel colors, artistic style"
+      ]
+    },
+    {
+      "id": "4",
+      "type": "CLIPTextEncode",
+      "pos": [0, 400],
+      "size": { "0": 140, "1": 170 },
+      "flags": {},
+      "inputs": [
+        { "name": "clip", "type": "CLIP", "link": "3" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["6"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": [
+        "blurry, low quality, distorted, deformed, ugly, disfigured, bad anatomy, watermark, text, cropped"
+      ]
+    },
+    {
+      "id": "5",
+      "type": "VAEEncode",
+      "pos": [300, 300],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "pixels", "type": "IMAGE", "link": "1" },
+        { "name": "vae", "type": "VAE", "link": "4" }
+      ],
+      "outputs": [
+        { "name": "LATENT", "type": "LATENT", "links": ["7"], "slot_index": 0 }
+      ]
+    },
+    {
+      "id": "6",
+      "type": "KSampler",
+      "pos": [500, 200],
+      "size": { "0": 140, "1": 200 },
+      "flags": {},
+      "inputs": [
+        { "name": "model", "type": "MODEL", "link": "2" },
+        { "name": "positive", "type": "CONDITIONING", "link": "5" },
+        { "name": "negative", "type": "CONDITIONING", "link": "6" },
+        { "name": "latent_image", "type": "LATENT", "link": "7" }
+      ],
+      "outputs": [
+        { "name": "LATENT", "type": "LATENT", "links": ["8"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "steps": 20,
+        "cfg": 7.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 0.7
+      }
+    },
+    {
+      "id": "7",
+      "type": "VAEDecode",
+      "pos": [700, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "samples", "type": "LATENT", "link": "8" },
+        { "name": "vae", "type": "VAE", "link": "4" }
+      ],
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": ["9"], "slot_index": 0 }
+      ]
+    },
+    {
+      "id": "8",
+      "type": "SaveImage",
+      "pos": [900, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "images", "type": "IMAGE", "link": "9" }
+      ],
+      "properties": {
+        "filename_prefix": "IMG2IMG_"
+      }
+    }
+  ],
+  "links": [
+    ["1", "1", "5", "pixels"],
+    ["2", "2", "6", "model"],
+    ["3", "2", "3", "clip"],
+    ["4", "2", "4", "vae"],
+    ["5", "3", "6", "positive"],
+    ["6", "4", "6", "negative"],
+    ["7", "5", "6", "latent_image"],
+    ["8", "6", "7", "samples"],
+    ["9", "7", "8", "images"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

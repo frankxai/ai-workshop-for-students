@@ -1,0 +1,165 @@
+global:
+  checkNewVersion: false
+  sendAnonymousUsage: false
+
+api:
+  dashboard: true
+  insecure: false
+
+entryPoints:
+  web:
+    address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+          permanent: true
+  websecure:
+    address: :443
+    http:
+      tls:
+        certresolver: letsencrypt
+
+providers:
+  docker:
+    network: ai-network
+    exposedByDefault: false
+    watch: true
+  file:
+    directory: /etc/traefik
+    watch: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "${LETSENCRYPT_EMAIL}"
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: web
+
+http:
+  middlewares:
+    # Security headers
+    security-headers:
+      headers:
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        forceSTSHeader: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"
+        permissionsPolicy: "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+    
+    # Rate limiting
+    rate-limit:
+      rateLimit:
+        average: 100
+        burst: 200
+        period: 1s
+    
+    # Auth for sensitive services
+    auth-basic:
+      basicAuth:
+        users:
+          - "admin:${HASHED_PASSWORD}"
+    
+    # Compression
+    compress: {}
+
+  routers:
+    # Traefik Dashboard (protected)
+    dashboard:
+      rule: "Host(`traefik.${DOMAIN}`)"
+      entryPoints:
+        - websecure
+      tls:
+        certresolver: letsencrypt
+      service: api@internal
+      middlewares:
+        - security-headers
+        - auth-basic
+
+    # OpenWebUI (Research)
+    openwebui:
+      rule: "Host(`ai.${DOMAIN}`)"
+      entryPoints:
+        - websecure
+      tls:
+        certresolver: letsencrypt
+      service: openwebui
+      middlewares:
+        - security-headers
+
+    # ComfyUI (Creation)
+    comfyui:
+      rule: "Host(`create.${DOMAIN}`)"
+      entryPoints:
+        - websecure
+      tls:
+        certresolver: letsencrypt
+      service: comfyui
+      middlewares:
+        - security-headers
+
+    # LobeChat
+    lobechat:
+      rule: "Host(`chat.${DOMAIN}`)"
+      entryPoints:
+        - websecure
+      tls:
+        certresolver: letsencrypt
+      service: lobechat
+      middlewares:
+        - security-headers
+
+    # n8n Automation
+    n8n:
+      rule: "Host(`automate.${DOMAIN}`)"
+      entryPoints:
+        - websecure
+      tls:
+        certresolver: letsencrypt
+      service: n8n
+      middlewares:
+        - security-headers
+        - auth-basic
+
+    # Monitoring
+    prometheus:
+      rule: "Host(`monitor.${DOMAIN}`)"
+      entryPoints:
+        - websecure
+      tls:
+        certresolver: letsencrypt
+      service: prometheus
+      middlewares:
+        - security-headers
+        - auth-basic
+
+  services:
+    openwebui:
+      loadBalancer:
+        servers:
+          - url: "http://openwebui:8080"
+    
+    comfyui:
+      loadBalancer:
+        servers:
+          - url: "http://comfyui:8188"
+    
+    lobechat:
+      loadBalancer:
+        servers:
+          - url: "http://lobechat:3210"
+    
+    n8n:
+      loadBalancer:
+        servers:
+          - url: "http://n8n:5678"
+    
+    prometheus:
+      loadBalancer:
+        servers:
+          - url: "http://prometheus:9090"

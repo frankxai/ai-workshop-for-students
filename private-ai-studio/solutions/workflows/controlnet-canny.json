@@ -1,0 +1,222 @@
+{
+  "last_node_id": "22",
+  "last_link_id": "22",
+  "nodes": [
+    {
+      "id": "1",
+      "type": "LoadImage",
+      "pos": [0, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": ["1"], "slot_index": 0 },
+        { "name": "MASK", "type": "MASK", "links": null, "slot_index": 1 }
+      ],
+      "properties": {
+        "image_load_type": "always",
+        "image": "reference.jpg"
+      }
+    },
+    {
+      "id": "2",
+      "type": "CannyEdgePreprocessor",
+      "pos": [0, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "image", "type": "IMAGE", "link": "1" }
+      ],
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": ["2"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "resolution": 512,
+        "low_threshold": 100,
+        "high_threshold": 200
+      }
+    },
+    {
+      "id": "3",
+      "type": "LoadCheckpoint",
+      "pos": [300, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "MODEL", "type": "MODEL", "links": ["3"], "slot_index": 0 },
+        { "name": "CLIP", "type": "CLIP", "links": ["4"], "slot_index": 1 },
+        { "name": "VAE", "type": "VAE", "links": ["5"], "slot_index": 2 }
+      ],
+      "properties": {
+        "ckpt_name": "sdxl_base.safetensors"
+      }
+    },
+    {
+      "id": "4",
+      "type": "ControlNetLoader",
+      "pos": [300, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "control_model", "type": "CONTROL_NET", "link": null }
+      ],
+      "outputs": [
+        { "name": "CONTROL_NET", "type": "CONTROL_NET", "links": ["6"], "slot_index": 0 }
+      ],
+      "properties": {
+        "control_net_name": "control_v11p_sd15_canny.pth"
+      }
+    },
+    {
+      "id": "5",
+      "type": "CLIPTextEncode",
+      "pos": [0, 400],
+      "size": { "0": 140, "1": 170 },
+      "flags": {},
+      "inputs": [
+        { "name": "clip", "type": "CLIP", "link": "4" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["7"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": [
+        "Professional portrait photography, dramatic lighting, studio quality, sharp focus, detailed skin texture"
+      ]
+    },
+    {
+      "id": "6",
+      "type": "CLIPTextEncode",
+      "pos": [0, 600],
+      "size": { "0": 140, "1": 170 },
+      "flags": {},
+      "inputs": [
+        { "name": "clip", "type": "CLIP", "link": "4" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["8"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": [
+        "blurry, low quality, distorted, deformed, ugly, disfigured, bad anatomy"
+      ]
+    },
+    {
+      "id": "7",
+      "type": "ControlNetApply",
+      "pos": [500, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "control_net", "type": "CONTROL_NET", "link": "6" },
+        { "name": "positive", "type": "CONDITIONING", "link": "7" },
+        { "name": "negative", "type": "CONDITIONING", "link": "8" },
+        { "name": "image", "type": "IMAGE", "link": "2" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["9"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "strength": 0.8
+      }
+    },
+    {
+      "id": "8",
+      "type": "KSampler",
+      "pos": [700, 200],
+      "size": { "0": 140, "1": 200 },
+      "flags": {},
+      "inputs": [
+        { "name": "model", "type": "MODEL", "link": "3" },
+        { "name": "positive", "type": "CONDITIONING", "link": "9" },
+        { "name": "negative", "type": "CONDITIONING", "link": "8" },
+        { "name": "latent_image", "type": "LATENT", "link": "11" }
+      ],
+      "outputs": [
+        { "name": "LATENT", "type": "LATENT", "links": ["12"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "steps": 30,
+        "cfg": 8.0,
+        "sampler_name": "dpmpp_2m",
+        "scheduler": "karras",
+        "denoise": 1.0
+      }
+    },
+    {
+      "id": "11",
+      "type": "EmptyLatentImage",
+      "pos": [500, 500],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "LATENT", "type": "LATENT", "links": ["11"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": "12",
+      "type": "VAEDecode",
+      "pos": [900, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "samples", "type": "LATENT", "link": "12" },
+        { "name": "vae", "type": "VAE", "link": "5" }
+      ],
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": ["13"], "slot_index": 0 }
+      ]
+    },
+    {
+      "id": "13",
+      "type": "SaveImage",
+      "pos": [1100, 200],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "images", "type": "IMAGE", "link": "13" }
+      ],
+      "properties": {
+        "filename_prefix": "CONTROLNET_"
+      }
+    }
+  ],
+  "links": [
+    ["1", "1", "2", "image"],
+    ["2", "2", "7", "image"],
+    ["3", "3", "8", "model"],
+    ["4", "3", "5", "clip"],
+    ["5", "3", "6", "vae"],
+    ["6", "4", "7", "control_net"],
+    ["7", "5", "7", "positive"],
+    ["8", "6", "7", "negative"],
+    ["9", "7", "8", "positive"],
+    ["11", "11", "8", "latent_image"],
+    ["12", "8", "12", "samples"],
+    ["13", "12", "13", "images"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

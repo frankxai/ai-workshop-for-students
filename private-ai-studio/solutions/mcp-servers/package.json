@@ -1,0 +1,21 @@
+{
+  "name": "@frankx/mcp-servers",
+  "version": "1.0.0",
+  "description": "MCP servers for GenCreator Labs Private AI Studio",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start:research": "tsx research-helper/index.ts",
+    "start:creation": "tsx creation-helper/index.ts",
+    "dev:research": "tsx watch research-helper/index.ts",
+    "dev:creation": "tsx watch creation-helper/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0",
+    "@types/node": "^20.0.0"
+  }
+}

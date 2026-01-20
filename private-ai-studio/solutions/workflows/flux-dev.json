@@ -1,0 +1,149 @@
+{
+  "last_node_id": "12",
+  "last_link_id": "12",
+  "nodes": [
+    {
+      "id": "6",
+      "type": "CLIPTextEncode",
+      "pos": [0, 0],
+      "size": { "0": 140, "1": 170 },
+      "flags": {},
+      "inputs": [
+        { "name": "clip", "type": "CLIP", "link": "6" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["7"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": [
+        "Cinematic photograph of a majestic wolf at sunset, dramatic golden hour lighting, detailed fur texture, epic composition, 8k resolution, national geographic style"
+      ]
+    },
+    {
+      "id": "5",
+      "type": "CLIPTextEncode",
+      "pos": [0, 200],
+      "size": { "0": 140, "1": 170 },
+      "flags": {},
+      "inputs": [
+        { "name": "clip", "type": "CLIP", "link": "5" }
+      ],
+      "outputs": [
+        { "name": "CONDITIONING", "type": "CONDITIONING", "links": ["8"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": [
+        "blurry, low quality, distorted, deformed, ugly, disfigured, bad anatomy, bad proportions, watermark, text, cropped"
+      ]
+    },
+    {
+      "id": "3",
+      "type": "FluxDevLoader",
+      "pos": [300, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "MODEL", "type": "MODEL", "links": ["3"], "slot_index": 0 },
+        { "name": "CLIP", "type": "CLIP", "links": ["5", "6"], "slot_index": 1 },
+        { "name": "VAE", "type": "VAE", "links": ["10"], "slot_index": 2 }
+      ],
+      "properties": {
+        "name": "flux.1-dev"
+      },
+      "widgets_values": {
+        "name": "flux.1-dev.safetensors",
+        "weight_dtype": "fp16"
+      }
+    },
+    {
+      "id": "9",
+      "type": "KSampler",
+      "pos": [500, 0],
+      "size": { "0": 140, "1": 200 },
+      "flags": {},
+      "inputs": [
+        { "name": "model", "type": "MODEL", "link": "3" },
+        { "name": "positive", "type": "CONDITIONING", "link": "7" },
+        { "name": "negative", "type": "CONDITIONING", "link": "8" },
+        { "name": "latent_image", "type": "LATENT", "link": "11" }
+      ],
+      "outputs": [
+        { "name": "LATENT", "type": "LATENT", "links": ["12"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "steps": 25,
+        "cfg": 7.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "denoise": 1.0
+      }
+    },
+    {
+      "id": "11",
+      "type": "EmptyLatentImage",
+      "pos": [300, 300],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "outputs": [
+        { "name": "LATENT", "type": "LATENT", "links": ["11"], "slot_index": 0 }
+      ],
+      "properties": {
+        "name": ""
+      },
+      "widgets_values": {
+        "width": 1024,
+        "height": 1024,
+        "batch_size": 1
+      }
+    },
+    {
+      "id": "12",
+      "type": "VAEDecode",
+      "pos": [700, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "samples", "type": "LATENT", "link": "12" },
+        { "name": "vae", "type": "VAE", "link": "10" }
+      ],
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": ["13"], "slot_index": 0 }
+      ]
+    },
+    {
+      "id": "13",
+      "type": "SaveImage",
+      "pos": [900, 0],
+      "size": { "0": 140, "1": 100 },
+      "flags": {},
+      "inputs": [
+        { "name": "images", "type": "IMAGE", "link": "13" }
+      ],
+      "properties": {
+        "filename_prefix": "FLUX_"
+      }
+    }
+  ],
+  "links": [
+    ["3", "3", "9", "model"],
+    ["5", "3", "5", "clip"],
+    ["6", "3", "6", "clip"],
+    ["7", "6", "9", "positive"],
+    ["8", "5", "9", "negative"],
+    ["10", "3", "12", "vae"],
+    ["11", "11", "9", "latent_image"],
+    ["12", "9", "12", "samples"],
+    ["13", "12", "13", "images"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
