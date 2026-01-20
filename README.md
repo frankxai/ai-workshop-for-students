@@ -30,6 +30,7 @@ GenCreator Labs is different from typical tutorials. We believe in:
 | [Creator's AI Toolkit](./creators-ai-toolkit/) | 2 days | Beginner | Complete creator automation |
 | [Oracle GenAI for Enterprise](./oracle-genai-enterprise/) | 2 days | Advanced | Enterprise decision framework |
 | [Agentic Creator Evolution](./agentic-creator-evolution/) | Ongoing | All | Progressive mastery path |
+| [Private AI Studio](./private-ai-studio/) | 3 days | Advanced | Self-hosted research & creation ecosystem |
 
 ---
 
@@ -72,12 +73,21 @@ Systematic validation of AI-generated code:
 
 ## 📚 Learning Paths
 
-### Developer Track (8 days)
+### Developer Track (10 days)
 ```
 Day 1: Personal AI Assistant Setup
 Days 2-3: Prompt Engineering Mastery
 Days 4-6: AI Coding Agents Mastery
 Days 7-8: MCP Server Architecture
+Days 9-10: Private AI Studio
+```
+
+### Infrastructure Track (3 days)
+```
+Days 1-2: Private AI Studio
+→ Deploy OpenWebUI, ComfyUI, n8n
+→ Configure RAG and MCP integration
+→ Set up monitoring and backups
 ```
 
 ### Creator Track (6 days)
@@ -124,6 +134,13 @@ Instead of recreating excellent content, we link to the best:
 - [OCI Generative AI Docs](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm)
 - [OCI GenAI Release Notes](https://docs.oracle.com/en-us/iaas/releasenotes/services/generative-ai/)
 - [Oracle AI Blueprints](https://www.oracle.com/application-development/ai-blueprints/)
+
+### Private AI Studios
+- [OpenWebUI Documentation](https://docs.openwebui.com)
+- [LobeChat Documentation](https://lobehub.com/docs)
+- [ComfyUI Documentation](https://docs.comfy.org)
+- [n8n Documentation](https://docs.n8n.io)
+- [Self-Hosted AI Guide](https://github.com/marshmallow-code/awesome-selfhosted-ai)
 
 ---
 
