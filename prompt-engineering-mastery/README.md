@@ -1,414 +1,179 @@
-# Prompt Engineering Mastery Workshop
-**From Basic Commands to Advanced AI Orchestration**
+# Prompt Engineering Mastery Lab
+**The 5C Framework for Consistent AI Results**
+
+*Part of GenCreator Labs by Frank*
 
 ---
 
-## Workshop Overview
+## 🎯 What You'll Learn
 
-Master the art and science of communicating with AI. Learn systematic prompt engineering techniques that consistently produce excellent results across any AI system.
-
-**Duration**: 2 days | **Level**: All Levels | **Foundation for All AI Work**
-
----
-
-## Why Prompt Engineering Matters
-
-```
-NOVICE PROMPTS                       ENGINEERED PROMPTS
-──────────────                       ─────────────────
-Vague requests                 →    Precise instructions
-Hit-or-miss results            →    Consistent quality
-Frustrating iterations         →    First-attempt success
-Generic outputs                →    Tailored responses
-Wasted tokens                  →    Efficient communication
-```
+- Understand how AI processes prompts
+- Master the 5C Framework (Context, Clarity, Conciseness, Consistency, Constraint)
+- Apply advanced techniques (Chain-of-Thought, Few-Shot, Role Prompting)
+- Build domain-specific prompt templates
+- Design multi-turn conversations
 
 ---
 
-## The FrankX Prompt Framework
+## ⏱️ Duration
 
-### The 5C Structure
+2 days | All Levels | **Foundation for All AI Work**
+
+---
+
+## 📋 Prerequisites
+
+- None! Perfect for beginners
+- Claude Code or any AI assistant access
+
+---
+
+## 🛠️ Tools & Resources
+
+### Main Tools (Follow Their Documentation)
+
+| Tool | Purpose | Documentation |
+|------|---------|---------------|
+| [Claude Code](https://docs.anthropic.com/claude-code) | Primary AI assistant | Official docs |
+| [Anthropic Prompt Engineering](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices) | Best practices | Official guide |
+
+### External Solutions (Best Practice)
+
+| Topic | Resource | Why It's Great |
+|-------|----------|----------------|
+| Claude 4 Best Practices | [Anthropic Engineering](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices) | Official tips |
+| Prompt Engineering | [Claude Code Best Practices](https://anthropic.com/engineering/claude-code-best-practices) | Engineering blog |
+
+---
+
+## 🧩 Frank's Unique Methods
+
+### The 5C Framework
 
 Every effective prompt contains these elements:
 
 | Component | Purpose | Example |
 |-----------|---------|---------|
 | **Context** | Background information | "I'm building a Next.js e-commerce site" |
-| **Constraints** | Rules and boundaries | "Use TypeScript, no external libraries" |
-| **Command** | The actual request | "Create a shopping cart component" |
-| **Clarifications** | Edge cases, preferences | "Handle empty cart state" |
-| **Completion** | Output format | "Include usage example" |
+| **Clarity** | Precise instructions | "Create a shopping cart component" |
+| **Conciseness** | Efficiency | No unnecessary words |
+| **Consistency** | Predictable format | Same structure each time |
+| **Constraint** | Boundaries | "Use TypeScript, no external libraries" |
+
+### Frank's Complete Prompt Formula
+
+```markdown
+[CONTEXT], [CLARITY], with [CONSTRAINTS], 
+considering [EDGE CASES], 
+output as [FORMAT].
+
+Example:
+"I'm a senior developer building a Node.js microservice for 
+payment processing with Express, TypeScript, and PostgreSQL. 
+Create a POST endpoint at /api/payments that accepts 
+{amount, currency, customerId}. Use strict TypeScript, 
+handle errors for invalid currency (400), customer not 
+found (404), insufficient funds (402). Return as JSON 
+with transactionId, status, timestamp."
+```
 
 ---
 
-## Workshop Structure
+## 📁 Lab Structure
 
-### Module 1: Fundamentals (2 hours)
-
-Understanding how AI processes prompts.
-
-**How LLMs Read Your Prompts**:
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    PROMPT PROCESSING                         │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│   YOUR TEXT                                                  │
-│       │                                                      │
-│       ▼                                                      │
-│   ┌───────────────┐                                         │
-│   │  Tokenization │  "Hello world" → [15496, 995]           │
-│   └───────┬───────┘                                         │
-│           │                                                  │
-│           ▼                                                  │
-│   ┌───────────────┐                                         │
-│   │   Attention   │  Which words relate to which?           │
-│   │   Mechanism   │  Context determines meaning             │
-│   └───────┬───────┘                                         │
-│           │                                                  │
-│           ▼                                                  │
-│   ┌───────────────┐                                         │
-│   │   Response    │  Most likely next tokens                │
-│   │  Generation   │  Based on patterns learned              │
-│   └───────────────┘                                         │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
+prompt-engineering-mastery/
+├── README.md              # This file
+├── 01-fundamentals/      # How AI reads prompts
+├── 02-five-c-framework/  # Master the 5Cs
+├── 03-advanced/         # CoT, Few-Shot, Role
+├── 04-domain-specific/   # Coding, review, docs
+├── 05-templates/        # Build your library
+├── 06-multi-turn/       # Conversation design
+├── templates/            # Downloadable templates
+│   ├── CLAUDE.md
+│   ├── skill.md
+│   └── agent.md
+└── solutions/            # Frank's implementations
+    ├── basic/
+    └── advanced/
 ```
-
-**Key Principles**:
-1. Order matters - earlier context has more weight
-2. Specific beats vague every time
-3. Examples are worth 1000 instructions
-4. Structure helps AI parse your request
-
-[Start Module 1 →](./01-fundamentals/)
 
 ---
 
-### Module 2: The 5C Framework (2 hours)
+## 🚀 Quick Start
 
-Master the systematic approach to prompt construction.
+```bash
+# Clone this lab
+git clone https://github.com/frankxai/ai-workshop-for-students.git
+cd ai-workshop-for-students/prompt-engineering-mastery
 
-**Context Setting**:
-```markdown
-BAD:  "Write some code"
-GOOD: "I'm a senior developer working on a Node.js
-       microservice that handles payment processing.
-       Our stack includes Express, TypeScript, and PostgreSQL."
+# Start with Module 1
+cd 01-fundamentals
 ```
-
-**Constraint Definition**:
-```markdown
-BAD:  "Make it good"
-GOOD: "Requirements:
-       - TypeScript strict mode
-       - No external dependencies beyond express
-       - Error handling for all edge cases
-       - Unit test coverage >80%"
-```
-
-**Clear Commands**:
-```markdown
-BAD:  "Do the API thing"
-GOOD: "Create a POST endpoint at /api/payments/process
-       that accepts {amount, currency, customerId} and
-       returns {transactionId, status, timestamp}"
-```
-
-**Clarifications**:
-```markdown
-"Edge cases to handle:
- - Invalid currency codes → return 400
- - Customer not found → return 404
- - Insufficient funds → return 402"
-```
-
-**Completion Format**:
-```markdown
-"Output format:
- 1. The endpoint code
- 2. Type definitions
- 3. Example curl command
- 4. Unit test example"
-```
-
-[Start Module 2 →](./02-five-c-framework/)
 
 ---
 
-### Module 3: Advanced Techniques (3 hours)
+## 📚 Learning Path
 
-Professional prompt engineering patterns.
+This lab is part of the GenCreator Labs ecosystem:
 
-**Chain-of-Thought Prompting**:
-```markdown
-"Think through this step by step:
-1. First, analyze the current implementation
-2. Identify potential issues
-3. Propose improvements
-4. Implement the best solution
-5. Verify it works"
 ```
+🤖 Getting Started
+   ↓
+[This Lab] ← Prompt Engineering Mastery
+   ↓
+🎯 Next Labs
+   → AI Coding Agents Mastery (apply prompts)
+   → Personal AI Assistant Setup (customize your AI)
+   → Any other lab!
 
-**Few-Shot Learning**:
-```markdown
-"Convert these function names to kebab-case:
-
-getUserById → get-user-by-id
-createNewPost → create-new-post
-validateEmailFormat → validate-email-format
-
-Now convert:
-fetchAllProducts →"
+🔄 Continuous Learning
+   → [Discord Community](https://discord.gg/frankx)
+   → [Progress Tracking](/progress)
 ```
-
-**Role Prompting**:
-```markdown
-"You are a senior security engineer conducting a code
-review. Analyze this authentication code for:
-- OWASP Top 10 vulnerabilities
-- Best practice violations
-- Potential attack vectors"
-```
-
-**Structured Output**:
-```markdown
-"Respond in JSON format:
-{
-  \"analysis\": \"...\",
-  \"issues\": [...],
-  \"recommendations\": [...],
-  \"priority\": \"high|medium|low\"
-}"
-```
-
-[Start Module 3 →](./03-advanced-techniques/)
 
 ---
 
-### Module 4: Domain-Specific Prompting (2 hours)
+## 👨‍🏫 For Professors
 
-Specialized prompts for different tasks.
+### Assign This Lab
 
-**Code Generation**:
-```markdown
-"Generate a [Language] function that:
-- Purpose: [What it does]
-- Inputs: [Parameters with types]
-- Outputs: [Return value]
-- Constraints: [Requirements]
-- Example usage: [Show me how to call it]"
+1. Share: `https://github.com/frankxai/ai-workshop-for-students/tree/main/prompt-engineering-mastery`
+2. Students work through modules (2 days)
+3. Use Claude Code to practice
+4. Build personal prompt library
+
+### Customization
+
+Fork and adapt for your curriculum:
+```bash
+git clone https://github.com/frankxai/ai-workshop-for-students.git
+# Add domain-specific examples for your field
 ```
-
-**Code Review**:
-```markdown
-"Review this code for:
-1. Security vulnerabilities
-2. Performance issues
-3. Code quality
-4. Best practice violations
-
-Format: Use headings for each category,
-bullet points for issues,
-severity ratings (🔴 Critical, 🟡 Warning, 🟢 Suggestion)"
-```
-
-**Documentation**:
-```markdown
-"Document this function with:
-- JSDoc/docstring format
-- Parameter descriptions
-- Return value explanation
-- Usage example
-- Edge case notes"
-```
-
-**Debugging**:
-```markdown
-"I'm getting this error: [Error message]
-
-Context:
-- Code: [Relevant code]
-- Expected: [What should happen]
-- Actual: [What's happening]
-
-Help me:
-1. Understand why this happens
-2. Find the root cause
-3. Fix it
-4. Prevent it in future"
-```
-
-[Start Module 4 →](./04-domain-specific/)
 
 ---
 
-### Module 5: Prompt Templates (2 hours)
+## 🤝 Contributing
 
-Build your personal prompt library.
-
-**Creating Templates**:
-```markdown
-# Template: Feature Implementation
-
-## Context
-Project: {{PROJECT_NAME}}
-Stack: {{TECH_STACK}}
-Current state: {{CURRENT_STATE}}
-
-## Request
-Implement {{FEATURE_NAME}} that {{FEATURE_DESCRIPTION}}
-
-## Requirements
-- {{REQUIREMENT_1}}
-- {{REQUIREMENT_2}}
-- {{REQUIREMENT_3}}
-
-## Constraints
-- {{CONSTRAINT_1}}
-- {{CONSTRAINT_2}}
-
-## Output Format
-1. Implementation plan
-2. Code with comments
-3. Tests
-4. Documentation
-```
-
-**Template Categories**:
-- Code generation
-- Refactoring
-- Review
-- Documentation
-- Debugging
-- Learning
-- Creative
-
-[Start Module 5 →](./05-prompt-templates/)
+See [CONTRIBUTING.md](https://github.com/frankxai/ai-workshop-for-students/blob/main/CONTRIBUTING.md)
 
 ---
 
-### Module 6: Multi-Turn Conversations (1.5 hours)
+## 📜 License
 
-Master extended AI conversations.
-
-**Conversation Design**:
-```
-TURN 1: Set context and overall goal
-TURN 2: Break down into subtasks
-TURN 3: Execute first subtask
-TURN 4: Review and refine
-TURN 5: Continue to next subtask
-...
-FINAL: Summarize and verify
-```
-
-**Context Management**:
-```markdown
-"Let's continue from where we left off.
-So far we've:
-- ✅ Created the database schema
-- ✅ Built the API endpoints
-- 🔄 Currently: Implementing authentication
-
-Next step: [Your request]"
-```
-
-**Steering Conversations**:
-```markdown
-"That's close, but adjust:
-- Keep the structure
-- Change X to Y
-- Add Z consideration
-- Remove the part about W"
-```
-
-[Start Module 6 →](./06-multi-turn/)
+- **Documentation**: CC BY 4.0
+- **Code**: MIT
+- **Frank's Unique Methods**: See individual files
 
 ---
 
-## Labs
+## 🏁 Ready?
 
-### Lab 1: 5C Practice (45 min)
-Transform vague requests into structured prompts.
+**[Start with Module 1 →](01-fundamentals/)**
 
-### Lab 2: Chain-of-Thought (45 min)
-Use CoT prompting for complex problems.
-
-### Lab 3: Template Building (1 hour)
-Create 5 personal prompt templates.
-
-### Lab 4: Domain Mastery (1 hour)
-Build prompts for your specific field.
-
-### Lab 5: Conversation Design (45 min)
-Plan and execute a multi-turn project.
+Questions? [Discord](https://discord.gg/frankx) | [Issues](https://github.com/frankxai/ai-workshop-for-students/issues)
 
 ---
 
-## Capstone Project
-
-**Build Your Prompt Library**
-
-Create a personal collection of:
-- [ ] 5 code generation templates
-- [ ] 3 code review templates
-- [ ] 3 documentation templates
-- [ ] 3 debugging templates
-- [ ] 5 domain-specific templates
-- [ ] Documentation with examples
-
----
-
-## Prompt Quality Checklist
-
-Before sending a prompt:
-
-- [ ] **Context** - Does AI know enough background?
-- [ ] **Specificity** - Is the request precise?
-- [ ] **Format** - Did I specify output format?
-- [ ] **Examples** - Would an example help?
-- [ ] **Constraints** - Are boundaries clear?
-- [ ] **Edge cases** - Did I mention special cases?
-
----
-
-## Common Anti-Patterns
-
-| Anti-Pattern | Problem | Solution |
-|--------------|---------|----------|
-| Vague requests | "Make it better" | Specify what "better" means |
-| Missing context | Assumes AI knows project | Provide relevant background |
-| Information dump | Too much irrelevant info | Curate to essentials |
-| No format spec | Unpredictable output | Define expected format |
-| Single-shot complex | Overwhelming request | Break into steps |
-
----
-
-## Resources
-
-### Templates
-- [FrankX Prompt Library](/prompt-library)
-- [Community Templates](https://github.com/frankx-ai/prompts)
-
-### Tools
-- Claude Code (prompts in CLAUDE.md)
-- Prompt versioning systems
-- A/B testing frameworks
-
-### Further Learning
-- AI Coding Agents Workshop
-- MCP Server Workshop
-- Evolution Framework
-
----
-
-## Start Mastering Prompts
-
-Ready to communicate effectively with AI?
-
-**[Begin with Module 1: Fundamentals →](./01-fundamentals/)**
-
----
-
-*The foundation of all AI work - master this, master AI.*
+*Part of [GenCreator Labs](https://frankx.ai/gencreator) by Frank - Transforming creators from tech-overwhelmed to AI-empowered.*

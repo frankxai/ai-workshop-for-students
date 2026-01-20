@@ -1,105 +1,65 @@
-# MCP Server Architecture Workshop
+# MCP Server Architecture Lab
 **Build Production-Grade Model Context Protocol Servers**
 
----
-
-## Workshop Overview
-
-The Model Context Protocol (MCP) is the open standard that connects AI models to your data. This workshop teaches you to build secure, production-ready MCP servers from scratch.
-
-**Duration**: 1-2 days | **Level**: Intermediate
+*Part of GenCreator Labs by Frank*
 
 ---
 
-## The MCP Revolution
+## 🎯 What You'll Learn
 
-```
-BEFORE MCP                           AFTER MCP
-──────────                           ─────────
-Custom integrations              →   Standard protocol
-One-off solutions                →   Reusable servers
-Security per integration         →   Built-in security
-Vendor lock-in                   →   Universal compatibility
-```
+- Understand MCP protocol fundamentals
+- Build your first MCP server with resources and tools
+- Implement production patterns (authentication, logging)
+- Deploy to production with monitoring
+- Connect servers to Claude Code
 
 ---
 
-## What You'll Build
+## ⏱️ Duration
 
-By completing this workshop:
-
-1. **Your First MCP Server**
-   - Complete resource implementation
-   - Custom tool definitions
-   - Prompt templates
-
-2. **Production Server**
-   - Error handling and logging
-   - Authentication and authorization
-   - Performance optimization
-
-3. **Real-World Integration**
-   - Connect to Claude Code
-   - Deploy to production
-   - Monitor and maintain
+1-2 days | Intermediate | Prerequisite: AI Coding Agents Mastery
 
 ---
 
-## Workshop Structure
+## 📋 Prerequisites
 
-### Module 1: MCP Fundamentals (1 hour)
-
-Understand the protocol before building.
-
-**Topics**:
-- Protocol architecture
-- Resources, Tools, Prompts
-- Transport mechanisms
-- Security model
-
-**Concepts Covered**:
-```
-┌────────────────────────────────────────────────────────────┐
-│                    MCP ARCHITECTURE                         │
-├────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌─────────────┐     MCP Protocol    ┌─────────────┐      │
-│  │   CLIENT    │◄───────────────────►│   SERVER    │      │
-│  │  (Claude)   │                      │  (Your Code)│      │
-│  └─────────────┘                      └─────────────┘      │
-│                                              │              │
-│       Requests:                              │              │
-│       • resources/list                       ▼              │
-│       • tools/call                   ┌─────────────┐      │
-│       • prompts/get                  │   DATA      │      │
-│                                       │  SOURCES   │      │
-│       Responses:                      │            │      │
-│       • Resource content             │ • Database │      │
-│       • Tool results                 │ • APIs     │      │
-│       • Prompt templates             │ • Files    │      │
-│                                       └─────────────┘      │
-│                                                             │
-└────────────────────────────────────────────────────────────┘
-```
-
-[Start Module 1 →](./01-fundamentals/)
+- Node.js 18+
+- Basic TypeScript knowledge
+- Claude Code or MCP client
+- Completed AI Coding Agents Mastery
 
 ---
 
-### Module 2: Building Your First Server (2 hours)
+## 🛠️ Tools & Resources
 
-Hands-on server development.
+### Main Tools (Follow Their Documentation)
 
-**What You'll Build**:
-A notes MCP server that allows AI to read and create notes.
+| Tool | Purpose | Documentation |
+|------|---------|---------------|
+| [MCP Specification](https://modelcontextprotocol.io/specification/latest) | Protocol definition | Read first |
+| [MCP SDK](https://github.com/modelcontextprotocol/sdk) | Official SDK | npm install |
+| [MCP GitHub](https://github.com/modelcontextprotocol) | Source code | Explore |
 
-**Key Code**:
+### External Solutions (Best Practice)
+
+| Topic | Resource | Why It's Great |
+|-------|----------|----------------|
+| MCP Servers | [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers) | 100+ examples |
+| MCP Blog | [Model Context Protocol Blog](https://blog.modelcontextprotocol.io/) | Latest updates |
+| Protocol Version | [2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25) | Latest stable |
+
+---
+
+## 🧩 Frank's Unique Methods
+
+### Frank's Production Server Template
+
 ```typescript
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 const server = new Server({
-  name: "notes-server",
+  name: "production-server",
   version: "1.0.0",
 }, {
   capabilities: {
@@ -108,241 +68,117 @@ const server = new Server({
   }
 });
 
-// Implement resources
-server.setRequestHandler("resources/list", async () => ({
-  resources: [{
-    uri: "notes://all",
-    name: "All Notes",
-    mimeType: "application/json"
-  }]
-}));
-
-// Implement tools
-server.setRequestHandler("tools/list", async () => ({
-  tools: [{
-    name: "create_note",
-    description: "Create a new note",
-    inputSchema: {
-      type: "object",
-      properties: {
-        title: { type: "string" },
-        content: { type: "string" }
-      },
-      required: ["title", "content"]
-    }
-  }]
-}));
-
-// Start server
-const transport = new StdioServerTransport();
-await server.connect(transport);
-```
-
-[Start Module 2 →](./02-first-server/)
-
----
-
-### Module 3: Advanced Patterns (2 hours)
-
-Production-ready implementation patterns.
-
-**Topics**:
-- Resource templates for dynamic data
-- Tool input validation
-- Prompt composition
-- Error handling strategies
-- Logging and monitoring
-
-**Patterns Covered**:
-
-```typescript
-// Pattern: Resource Templates
-server.setRequestHandler("resources/templates/list", async () => ({
-  resourceTemplates: [{
-    uriTemplate: "notes://{id}",
-    name: "Note by ID",
-    mimeType: "application/json"
-  }]
-}));
-
-// Pattern: Tool with Validation
-server.setRequestHandler("tools/call", async (request) => {
-  const { name, arguments: args } = request.params;
-
-  // Validation
-  if (!args.title || args.title.length < 1) {
-    throw new Error("Title is required");
-  }
-
-  // Implementation
-  const result = await createNote(args);
-
-  return {
-    content: [{
-      type: "text",
-      text: JSON.stringify(result)
-    }]
-  };
-});
-
-// Pattern: Error Handling
-server.onerror = (error) => {
-  console.error("[MCP Error]", error);
-};
-```
-
-[Start Module 3 →](./03-advanced-patterns/)
-
----
-
-### Module 4: Production Deployment (2 hours)
-
-Deploy secure, scalable MCP servers.
-
-**Topics**:
-- Authentication strategies
-- Rate limiting
-- Health checks
-- Docker deployment
-- Monitoring setup
-
-**Deployment Architecture**:
-```
-┌─────────────────────────────────────────────────────────────┐
-│                  PRODUCTION DEPLOYMENT                       │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│   ┌──────────────┐                                          │
-│   │ Load Balancer│                                          │
-│   └──────┬───────┘                                          │
-│          │                                                   │
-│   ┌──────┴──────┐                                           │
-│   │             │                                            │
-│   ▼             ▼                                            │
-│ ┌────────┐  ┌────────┐                                      │
-│ │ Server │  │ Server │  ← Container instances               │
-│ │   1    │  │   2    │                                      │
-│ └────┬───┘  └────┬───┘                                      │
-│      │           │                                           │
-│      └─────┬─────┘                                          │
-│            │                                                 │
-│      ┌─────▼─────┐                                          │
-│      │  Database │  ← Shared state                          │
-│      └───────────┘                                          │
-│                                                              │
-│  Monitoring: Prometheus + Grafana                           │
-│  Logging: Structured JSON logs                              │
-│                                                              │
-└─────────────────────────────────────────────────────────────┘
-```
-
-[Start Module 4 →](./04-production/)
-
----
-
-## Labs
-
-### Lab 1: Notes Server (45 min)
-Build a complete notes MCP server with resources and tools.
-
-### Lab 2: Database Integration (1 hour)
-Connect your MCP server to PostgreSQL.
-
-### Lab 3: API Gateway (45 min)
-Build an MCP server that wraps external APIs.
-
-### Lab 4: Authentication (1 hour)
-Implement secure authentication for your server.
-
----
-
-## Capstone Project
-
-**Build a Knowledge Base MCP Server**
-
-Requirements:
-- [ ] Resources: List documents, get document by ID
-- [ ] Tools: Search, create, update, delete
-- [ ] Prompts: Summary template, Q&A template
-- [ ] Auth: API key authentication
-- [ ] Deployment: Docker + health checks
-
----
-
-## MCP Server Templates
-
-### Minimal Server
-```typescript
-import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-
-const server = new Server({ name: "minimal", version: "1.0.0" });
-
-// Add your resources and tools here
+// Implement authentication
+// Add logging
+// Add error handling
 
 export default server;
 ```
 
-### Database Server
-```typescript
-// Template for database integration
-// See labs/database-template/
+### Frank's Quality Gates for MCP
+
+See [`ai-coding-agents/solutions/advanced/evolution-framework.js`](ai-coding-agents/solutions/advanced/evolution-framework.js) for:
+- Type safety verification
+- Test coverage requirements
+- Security scanning
+- Documentation checks
+
+---
+
+## 📁 Lab Structure
+
+```
+mcp-server-mastery/
+├── README.md              # This file
+├── 01-fundamentals/      # Protocol concepts
+├── 02-first-server/      # Build notes server
+├── 03-advanced-patterns/ # Production patterns
+├── 04-production/       # Deployment
+├── templates/            # Downloadable templates
+│   ├── CLAUDE.md
+│   ├── skill.md
+│   └── agent.md
+└── solutions/            # Frank's implementations
+    ├── basic/
+    └── advanced/
 ```
 
-### API Wrapper Server
-```typescript
-// Template for wrapping REST APIs
-// See labs/api-wrapper-template/
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone this lab
+git clone https://github.com/frankxai/ai-workshop-for-students.git
+cd ai-workshop-for-students/mcp-server-mastery
+
+# Install MCP SDK
+npm install @modelcontextprotocol/sdk
+
+# Start with Module 1
+cd 01-fundamentals
 ```
 
 ---
 
-## Resources
+## 📚 Learning Path
 
-### Official Documentation
-- [MCP Specification](https://spec.modelcontextprotocol.io)
-- [MCP SDK Reference](https://github.com/modelcontextprotocol/sdk)
-- [Example Servers](https://github.com/modelcontextprotocol/servers)
+This lab is part of the GenCreator Labs ecosystem:
 
-### Community
-- FrankX Discord #mcp-builders
-- MCP GitHub Discussions
-- Weekly MCP Office Hours
+```
+🤖 AI Coding Agents Mastery (prerequisite)
+   ↓
+[This Lab] ← MCP Server Architecture
+   ↓
+🎯 Next Labs
+   → Oracle GenAI Enterprise (enterprise patterns)
+   → Evolution Framework (orchestration)
 
-### Tools
-- `@modelcontextprotocol/sdk` - Official SDK
-- `mcp-inspector` - Debug tool
-- `mcp-test` - Testing framework
-
----
-
-## Quality Certification
-
-This workshop meets FrankX quality standards:
-
-- [x] All code examples tested (TypeScript 5.x, Node 20)
-- [x] 40%+ hands-on content
-- [x] Clear learning objectives
-- [x] Production-ready patterns
-- [x] Troubleshooting guides included
+🔄 Continuous Learning
+   → [Discord Community](https://discord.gg/frankx)
+   → [MCP Office Hours](/office-hours)
+```
 
 ---
 
-## Prerequisites
+## 👨‍🏫 For Professors
 
-Before starting, ensure you have:
-- Node.js 18+ installed
-- Basic TypeScript knowledge
-- Claude Code or another MCP client
-- Completed AI Coding Agents prerequisites
+### Assign This Lab
+
+1. Share: `https://github.com/frankxai/ai-workshop-for-students/tree/main/mcp-server-mastery`
+2. Students work through modules (2 days)
+3. Use MCP official docs as primary reference
+4. Assess using Frank's production patterns
+
+### Prerequisites Verification
+
+- [ ] Node.js installed
+- [ ] TypeScript basics
+- [ ] Claude Code access
+- [ ] AI Coding Agents completed
 
 ---
 
-## Start Your Journey
+## 🤝 Contributing
 
-Ready to build your first MCP server?
-
-**[Begin with Module 1: Fundamentals →](./01-fundamentals/)**
+See [CONTRIBUTING.md](https://github.com/frankxai/ai-workshop-for-students/blob/main/CONTRIBUTING.md)
 
 ---
 
-*This workshop is part of the FrankX Workshop System, integrated with frankx.ai/workshops and the Agentic-Creator OS.*
+## 📜 License
+
+- **Documentation**: CC BY 4.0
+- **Code**: MIT
+- **Frank's Unique Methods**: See individual files
+
+---
+
+## 🏁 Ready?
+
+**[Start with Module 1 →](01-fundamentals/)**
+
+Questions? [Discord](https://discord.gg/frankx) | [Issues](https://github.com/frankxai/ai-workshop-for-students/issues)
+
+---
+
+*Part of [GenCreator Labs](https://frankx.ai/gencreator) by Frank - Transforming creators from tech-overwhelmed to AI-empowered.*
