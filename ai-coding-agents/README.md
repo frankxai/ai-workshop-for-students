@@ -3,225 +3,225 @@
 
 ---
 
-## The Transformation
+## 🎯 What You'll Learn
+
+- Install and configure multiple AI coding agents (Claude Code, OpenCode, Cline, Roo Code)
+- Build custom skills, agents, and MCP servers
+- Create your personal evolution framework (CLAUDE.md → skill.md → agent.md → orchestration)
+- Master multi-agent orchestration patterns
+- Apply Frank's quality gates for AI-generated code
+
+---
+
+## ⏱️ Duration
+
+3 days | 6 modules | 40%+ hands-on
+
+---
+
+## 📋 Prerequisites
+
+- VS Code or terminal environment
+- Git configured
+- API keys (Claude, OpenAI - free tiers available)
+- Node.js 18+ or Bun installed
+
+---
+
+## 🛠️ Tools & Resources
+
+### Main Tools (Follow Their Documentation)
+
+| Tool | Purpose | Documentation |
+|------|---------|---------------|
+| [Claude Code](https://docs.anthropic.com/claude-code) | Primary AI coding agent | Official docs |
+| [OpenCode](https://github.com/opencode-ai/opencode) | Open-source alternative | README |
+| [Cline](https://github.com/cline/cline) | VS Code native | Wiki |
+| [Roo Code](https://github.com/RooCodeInc/RooCode) | Multi-model support | Setup guide |
+| [Kilo Code](https://github.com/kilo-code/kilo-code) | Lightweight option | Quick start |
+
+### External Solutions (Learn from the Best)
+
+| Topic | Resource | Why It's Great |
+|-------|----------|----------------|
+| Claude Code Tips | [claude-code-tips](https://github.com/someone/awesome-claude) | Community curated |
+| VS Code + AI | [awesome-ai-agents](https://github.com/punkpeye/awesome-ai-agents) | Curated list |
+| MCP Examples | [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | 100+ implementations |
+| AI Coding Patterns | [ai-coding-handbook](https://github.com/someone/handbook) | Best practices |
+
+> 💡 **Frank's Tip**: Start with official docs, then explore these resources for advanced patterns.
+
+---
+
+## 🧩 Frank's Unique Methods
+
+### The Evolution Framework
+
+The complete progression from basic prompts to multi-agent orchestration:
 
 ```
-BEFORE                              AFTER
-──────                              ─────
-Manual coding                   →   AI-augmented flow
-Copy-paste from StackOverflow   →   Contextual AI assistance
-Hours of debugging              →   Intelligent error resolution
-Repetitive tasks                →   Automated workflows
-Isolated tools                  →   Orchestrated agent systems
-```
-
----
-
-## What You'll Build
-
-By the end of this workshop, you will have:
-
-1. **Personal AI Coding Environment**
-   - Fully configured coding agent (Claude Code, OpenCode, or alternatives)
-   - Custom MCP servers for your data sources
-   - Personalized skills and agent configurations
-
-2. **Evolution Framework**
-   - skill.md files for domain expertise
-   - agent.md configurations for specialized behaviors
-   - CLAUDE.md project instructions
-   - Plugin system for extensibility
-
-3. **Production Workflows**
-   - Git integration with AI commit messages
-   - Automated code review
-   - Test generation and execution
-   - Documentation workflows
-
----
-
-## Workshop Structure
-
-### Module 0: Prerequisites (30 min)
-Get your environment ready for AI-powered development.
-
-- [x] VS Code or terminal environment
-- [x] Git configured
-- [x] API keys (Claude, OpenAI - optional)
-- [x] Node.js 18+ or Bun installed
-
-[Start Prerequisites →](./00-prerequisites/)
-
----
-
-### Module 1: Foundations (1 hour)
-Understand how AI coding agents work and why they matter.
-
-**Topics**:
-- The anatomy of a coding agent
-- LLM capabilities and limitations
-- Context windows and prompting
-- Agent architectures (ReAct, Tool Use, Planning)
-- The MCP protocol revolution
-
-[Start Foundations →](./01-foundations/)
-
----
-
-### Module 2: Setup Guides (2 hours)
-Install and configure the top open-source coding agents.
-
-**Agents Covered**:
-
-| Agent | Strengths | Best For |
-|-------|-----------|----------|
-| **Claude Code** | Official Anthropic CLI, best Claude integration | Primary recommendation |
-| **OpenCode** | Open-source, extensible, community-driven | Customization, self-hosted |
-| **Cline** | VS Code native, visual feedback | VS Code users |
-| **Roo Code** | Multi-model, flexible | Model experimentation |
-| **Kilo Code** | Lightweight, fast | Quick tasks |
-
-[Start Setup Guides →](./02-setup-guides/)
-
----
-
-### Module 3: First Agent (2 hours)
-Build and customize your first AI coding assistant.
-
-**Projects**:
-1. Configure basic agent settings
-2. Create your first prompt template
-3. Build a simple automation
-4. Connect to a local database
-
-[Start First Agent →](./03-first-agent/)
-
----
-
-### Module 4: Advanced Patterns (3 hours)
-Master sophisticated agent capabilities.
-
-**Topics**:
-- MCP server architecture
-- Custom tool development
-- Multi-agent orchestration
-- Memory and context management
-- Hooks and middleware
-
-[Start Advanced →](./04-advanced/)
-
----
-
-### Module 5: Evolution Path (3 hours)
-Transform from user to builder with the evolution framework.
-
-**The Evolution Stack**:
-
-```
+Level 5: Ecosystem Architect
+         Full system design, agent teams
+              ↑
 Level 4: Orchestration
-         Multiple agents, handoffs, workflows
-                    ↑
+         Multi-agent workflows, handoffs
+              ↑
 Level 3: agent.md
          Agent behaviors, personas, specializations
-                    ↑
+              ↑
 Level 2: skill.md
          Domain knowledge, best practices, patterns
-                    ↑
+              ↑
 Level 1: CLAUDE.md
          Project context, codebase instructions
-                    ↑
+              ↑
 Level 0: Basic Usage
          Prompts, simple commands
 ```
 
-[Start Evolution →](./05-evolution/)
+### Frank's Claude Code Configuration
+
+```json
+{
+  "temperature": 0.1,
+  "max_tokens": 4096,
+  "system_prompt": "You are an expert developer. Think step by step. Always verify your changes.",
+  "tools": {
+    "Bash": { "enabled": true },
+    "Read": { "enabled": true },
+    "Write": { "enabled": true },
+    "Glob": { "enabled": true },
+    "Grep": { "enabled": true },
+    "Edit": { "enabled": true },
+    "LS": { "enabled": true }
+  }
+}
+```
+
+### Quality Gates for AI Code
+
+```typescript
+// Frank's quality gate system
+const qualityGates = [
+  {
+    name: 'Type Safety',
+    check: (code) => hasNoTypeErrors(code),
+    threshold: 1.0
+  },
+  {
+    name: 'Test Coverage',
+    check: (code) => testCoverage(code) >= 80,
+    threshold: 0.8
+  },
+  {
+    name: 'Linting',
+    check: (code) => lintScore(code) >= 9,
+    threshold: 9
+  },
+  {
+    name: 'Security',
+    check: (code) => noVulnerabilities(code),
+    threshold: 1.0
+  }
+]
+```
 
 ---
 
-## Labs & Projects
+## 📁 Workshop Structure
 
-### Hands-On Labs
-Each module includes practical exercises:
-
-| Lab | Description | Duration |
-|-----|-------------|----------|
-| Lab 1 | Configure Claude Code from scratch | 30 min |
-| Lab 2 | Create custom slash commands | 45 min |
-| Lab 3 | Build an MCP server for your notes | 1 hour |
-| Lab 4 | Set up multi-agent code review | 1 hour |
-| Lab 5 | Create your evolution framework | 1.5 hours |
-
-### Capstone Projects
-
-**Project A: Personal Knowledge Agent**
-Build an AI assistant that knows your codebase, documentation, and preferences.
-
-**Project B: Team Coding Standards Enforcer**
-Create an agent that enforces your team's coding standards automatically.
-
-**Project C: Documentation Generator**
-Build a system that generates and maintains documentation from code.
+```
+ai-coding-agents/
+├── README.md              # This file
+├── 00-prerequisites/      # What you need before starting
+├── 01-foundations/        # Core concepts
+├── 02-setup-guides/       # Tool configuration
+├── 03-first-agent/        # Build your first agent
+├── 04-advanced/           # MCP, orchestration
+├── 05-evolution/          # Complete framework
+├── templates/             # Downloadable starting points
+│   ├── CLAUDE.md          # Project context template
+│   ├── skill.md           # Domain expertise template
+│   └── agent.md           # Agent behavior template
+└── solutions/             # Frank's implementations
+    ├── basic-agent/       # Simple implementation
+    └── orchestration/     # Multi-agent system
+```
 
 ---
 
-## Recommended Learning Path
+## 🚀 Quick Start
 
-### Day 1: Foundations & Setup
-- Morning: Modules 0-1 (Prerequisites, Foundations)
-- Afternoon: Module 2 (Setup Guides)
-- Evening: Lab 1 (Configure Claude Code)
+```bash
+# Clone this workshop
+git clone https://github.com/frankxai/ai-workshop-for-students.git
+cd ai-workshop-for-students/ai-coding-agents
 
-### Day 2: Building & Customizing
-- Morning: Module 3 (First Agent)
-- Afternoon: Labs 2-3 (Commands, MCP Server)
-- Evening: Module 4 Part 1 (Advanced Patterns)
-
-### Day 3: Mastery & Evolution
-- Morning: Module 4 Part 2 (Orchestration)
-- Afternoon: Module 5 (Evolution Framework)
-- Evening: Capstone Project
+# Start with prerequisites
+cd 00-prerequisites
+# Follow the guide...
+```
 
 ---
 
-## Resources
+## 📚 Learning Path
 
-### Official Documentation
-- [Claude Code Docs](https://docs.anthropic.com/claude-code)
-- [MCP Protocol Spec](https://spec.modelcontextprotocol.io)
-- [OpenCode GitHub](https://github.com/opencode-ai/opencode)
+This workshop is part of the FrankX learning ecosystem:
 
-### Community
-- FrankX Discord (workshop channel)
-- GitHub Discussions
-- Weekly Office Hours
+```
+🤖 Getting Started
+   ↓
+[This Workshop] ← You are here
+   ↓
+🎯 Next Workshops
+   → MCP Server Architecture (deepen extensibility)
+   → Oracle GenAI Enterprise (enterprise patterns)
 
-### Tools Recommended
-- **Editor**: VS Code with Claude extension
-- **Terminal**: iTerm2 / Windows Terminal
-- **MCP**: Official MCP servers + custom builds
-- **Testing**: Vitest / Jest for agent testing
-
----
-
-## Quality Gates
-
-This workshop meets FrankX quality standards:
-
-- [x] All code examples tested and working (Jan 2026)
-- [x] Clear learning objectives per module
-- [x] 40%+ hands-on content
-- [x] Real-world applicable projects
-- [x] Assessment checkpoints included
-- [x] Troubleshooting guides complete
+🔄 Continuous Learning
+   → [Discord Community](https://discord.gg/frankx)
+   → [Office Hours](/office-hours)
+   → [Progress Tracking](/progress)
+```
 
 ---
 
-## Start Your Journey
+## 👨‍🏫 For Professors
 
-Ready to transform your development workflow?
+### Assign This Workshop
 
-**[Begin with Prerequisites →](./00-prerequisites/)**
+1. Share: `https://github.com/frankxai/ai-workshop-for-students/tree/main/ai-coding-agents`
+2. Students follow at their pace (3 days)
+3. Link to external resources for deeper exploration
+4. Use Frank's evolution framework as the main assessment
+
+### Assessment Ideas
+
+- Have students compare Claude Code with OpenCode
+- Assign improvements to Frank's quality gate system
+- Create derivative agents using templates
 
 ---
 
-*This workshop is part of the FrankX Workshop System, integrated with frankx.ai/workshops and the Agentic-Creator OS.*
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](https://github.com/frankxai/ai-workshop-for-students/blob/main/CONTRIBUTING.md)
+
+---
+
+## 📜 License
+
+- **Documentation**: CC BY 4.0
+- **Code**: MIT
+- **Frank's Unique Methods**: See individual files
+
+---
+
+## 🏁 Ready?
+
+**[Start with Prerequisites →](00-prerequisites/)**
+
+Questions? [Discord](https://discord.gg/frankx) | [Issues](https://github.com/frankxai/ai-workshop-for-students/issues)
+
+---
+
+*Part of [FrankX](https://frankx.ai) - Transforming creators from tech-overwhelmed to AI-empowered.*

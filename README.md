@@ -1,157 +1,189 @@
-# FrankX Technical Workshops
-
-**Free, hands-on workshops for creators and developers mastering AI.**
-
-[![Workshop Validation](https://github.com/frankx-ai/workshops/actions/workflows/validate.yml/badge.svg)](https://github.com/frankx-ai/workshops/actions/workflows/validate.yml)
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# FrankX Technical Workshops for Students
+**Helping students become excellent in the age of intelligence**
 
 ---
 
-## What's Inside
+## Our Mission
 
-Production-ready workshops that bridge cutting-edge AI with practical implementation. All code tested. All modules hands-on.
-
-| Workshop | Duration | Level | Description |
-|----------|----------|-------|-------------|
-| [AI Coding Agents Mastery](./ai-coding-agents/) | 2-3 days | All | Master Claude Code, OpenCode, Cline, and the evolution framework |
-| [Personal AI Assistant Setup](./personal-ai-assistant-setup/) | 1 day | Beginner | Build your customized AI development environment |
-| [MCP Server Architecture](./mcp-server-mastery/) | 1-2 days | Intermediate | Build production-grade Model Context Protocol servers |
-| [Prompt Engineering Mastery](./prompt-engineering-mastery/) | 2 days | All | The 5C Framework for consistently excellent AI results |
-| [Suno AI Music Creation](./suno-music-creation/) | 1-2 days | All | Create music without musical training using AI |
-| [Creator's AI Toolkit](./creators-ai-toolkit/) | 2 days | Beginner | Complete AI system for content creators |
-| [Oracle GenAI Enterprise](./oracle-genai-enterprise/) | 2 days | Advanced | When and why OCI vs public AI APIs |
+Transform students and developers from AI-curious to AI-empowered through hands-on workshops that amplify the best existing resources while providing Frank's unique frameworks and methods.
 
 ---
 
-## Quick Start
+## 🎓 For Students
 
-### New to AI?
-Start with **[Personal AI Assistant Setup](./personal-ai-assistant-setup/)** - configure Claude Code and build your first custom skills in one day.
+### How to Use These Workshops
 
-### Developer?
-Jump into **[AI Coding Agents Mastery](./ai-coding-agents/)** - from basic prompts to multi-agent orchestration.
+1. **Start at frankx.ai/workshops** - Browse, choose your path
+2. **Come here for the details** - Comprehensive docs, code, and links
+3. **Follow external links** - We point you to the best existing resources
+4. **Use Frank's unique methods** - Only here will you find these
 
-### Creator?
-Begin with **[Creator's AI Toolkit](./creators-ai-toolkit/)** - build ideation engines and voice-matched writing assistants.
+### Learning Paths
 
-### Want to make music?
-Try **[Suno AI Music Creation](./suno-music-creation/)** - no musical training required.
-
----
-
-## Quality Standards
-
-Every workshop guarantees:
-
-- **40%+ hands-on content** - Learn by doing
-- **All code tested** - Verified monthly
-- **Real-world projects** - Portfolio-worthy outcomes
-- **Clear objectives** - Know what you'll achieve
-- **Regular updates** - Latest tools and techniques
+| Path | Workshops | Duration |
+|------|-----------|----------|
+| **Developer Track** | Personal AI Assistant → Prompt Engineering → AI Coding Agents → MCP Architecture | 8 days |
+| **Creator Track** | Prompt Engineering → Creator's Toolkit → Suno Music | 6 days |
+| **Quick Start** | Personal AI Assistant → Pick your interest | 1+ days |
 
 ---
 
-## The Evolution Framework
+## 🔗 Workshop Links
 
-Progress from AI user to ecosystem architect:
+All workshops are in: https://github.com/frankxai/ai-workshop-for-students
 
-```
-Level 5: Ecosystem Architect
-         Full system design
-              ↑
-Level 4: Orchestration
-         Multi-agent workflows
-              ↑
-Level 3: agent.md
-         Agent behaviors
-              ↑
-Level 2: skill.md
-         Domain expertise
-              ↑
-Level 1: CLAUDE.md
-         Project context
-              ↑
-Level 0: Basic Prompts
-         Simple commands
-```
+| Workshop | GitHub | What You'll Learn |
+|----------|--------|-------------------|
+| [AI Coding Agents Mastery](./ai-coding-agents/) | [GitHub](./ai-coding-agents/) | Master Claude Code, evolution framework |
+| [Personal AI Assistant Setup](./personal-ai-assistant-setup/) | [GitHub](./personal-ai-assistant-setup/) | Build your custom AI environment |
+| [MCP Server Architecture](./mcp-server-mastery/) | [GitHub](./mcp-server-mastery/) | Production MCP servers |
+| [Prompt Engineering Mastery](./prompt-engineering-mastery/) | [GitHub](./prompt-engineering-mastery/) | The 5C Framework |
+| [Suno AI Music Creation](./suno-music-creation/) | [GitHub](./suno-music-creation/) | Vibe OS signature styles |
+| [Creator's AI Toolkit](./creators-ai-toolkit/) | [GitHub](./creators-ai-toolkit/) | Complete creator automation |
+| [Oracle GenAI for Enterprise](./oracle-genai-enterprise/) | [GitHub](./oracle-genai-enterprise/) | Enterprise decision framework |
+| [Agentic Creator Evolution](./agentic-creator-evolution/) | [GitHub](./agentic-creator-evolution/) | Progressive mastery path |
 
 ---
 
-## Learning Paths
+## 📚 What Makes This Different
 
-### Developer Track (8 days)
-```
-Personal AI Assistant Setup (Day 1)
-         ↓
-Prompt Engineering Mastery (Days 2-3)
-         ↓
-AI Coding Agents Mastery (Days 4-6)
-         ↓
-MCP Server Architecture (Days 7-8)
-```
+### We Amplify, Don't Duplicate
 
-### Creator Track (6 days)
-```
-Prompt Engineering Mastery (Days 1-2)
-         ↓
-Creator's AI Toolkit (Days 3-4)
-         ↓
-Suno AI Music Creation (Days 5-6)
-```
+| Instead of... | We... |
+|---------------|-------|
+| Repeating Claude Code docs | Link to official docs, share Frank's optimized configs |
+| Recreating MCP tutorial | Point to spec, provide production patterns |
+| Basic prompt examples | Teach the 5C Framework, domain-specific methods |
+| Standard CI/CD | Share Frank's quality gates for AI projects |
 
-### Quick Start (1-2 days)
+### External Resources
+
+We intentionally link to the best existing resources:
+
+- [Claude Code Documentation](https://docs.anthropic.com/claude-code)
+- [MCP Protocol Specification](https://spec.modelcontextprotocol.io)
+- [OpenCode GitHub](https://github.com/opencode-ai/opencode)
+- [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)
+- [Suno Guide](https://suno.com/help)
+
+### Frank's Unique Contributions
+
+These are only found in our workshops:
+
+- **Evolution Framework**: skill.md → agent.md → orchestration
+- **5C Framework**: Context, Clarity, Conciseness, Consistency, Constraint
+- **Vibe OS**: Signature styles for Suno music
+- **Quality Gates**: Testing AI outputs systematically
+- **Personal AI Setup**: Frank's optimized configuration
+
+---
+
+## 🛠️ Workshop Structure
+
+Each workshop follows this pattern:
+
 ```
-Personal AI Assistant Setup (Day 1)
-         ↓
-Pick your interest:
-  → Developer: AI Coding Agents
-  → Creator: Creator's AI Toolkit
-  → Music: Suno Music Creation
+workshop-name/
+├── README.md              # This workshop's guide
+├── 00-prerequisites/      # What you need before starting
+├── 01-foundations/        # Core concepts
+├── 02-setup/              # Tool configuration
+├── 03-practice/           # Hands-on exercises
+├── 04-advanced/           # Expert techniques
+├── templates/             # Downloadable starting points
+│   ├── claude.md
+│   ├── skill.md
+│   └── agent.md
+└── solutions/             # Frank's implementations
+    ├── basic/
+    └── advanced/
 ```
 
 ---
 
-## Contributing
+## 👨‍🏫 For Professors
 
-We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for:
+### Why Use These Workshops?
 
-- Content guidelines
-- Pull request process
-- Quality standards
-- Recognition program
+1. **Curated, not overwhelming** - We filter the noise
+2. **Always up-to-date** - Links to official docs, not stale tutorials
+3. **Frank's unique value** - Methods you won't find elsewhere
+4. **Flexible** - Use as-is or customize
+5. **Proven** - Tested in real learning environments
 
-### Quick Contribution Guide
+### How to Assign
 
-1. Fork this repository
-2. Create a branch: `git checkout -b feat/my-improvement`
-3. Make your changes
-4. Ensure quality standards are met
-5. Submit a PR
+1. Share the workshop GitHub link with students
+2. Students work through modules at their pace
+3. Use external resources as supplementary material
+4. Assess using Frank's unique methods as extensions
 
----
+### Customization
 
-## License
-
-- **Content** (documentation, text): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **Code** (examples, scripts): [MIT License](./LICENSE-MIT)
-
----
-
-## Support
-
-- **Discord**: [FrankX Community](https://discord.gg/frankx)
-- **Issues**: [GitHub Issues](https://github.com/frankx-ai/workshops/issues)
-- **Website**: [frankx.ai/workshops](https://frankx.ai/workshops)
+- Fork the repo: `https://github.com/frankxai/ai-workshop-for-students/fork`
+- Replace Frank's configs with your institution's standards
+- Add your own examples
+- Share improvements via PR
 
 ---
 
-## Acknowledgments
+## 🚀 Quick Start
 
-Built with passion by the FrankX community. Special thanks to all contributors who help keep these workshops current and valuable.
+```bash
+# Clone all workshops
+git clone https://github.com/frankxai/ai-workshop-for-students.git
+cd ai-workshop-for-students
+
+# Or clone just one workshop
+git clone https://github.com/frankxai/ai-workshop-for-students.git
+cd ai-workshop-for-students/ai-coding-agents
+```
 
 ---
 
-**[Start Your Journey →](https://frankx.ai/workshops)**
+## 🎯 Progress Tracking
 
-*Transforming creators from tech-overwhelmed to AI-empowered.*
+Track your progress at [frankx.ai/progress](/progress):
+
+- [ ] Complete all workshops in a learning path
+- [ ] Build capstone projects
+- [ ] Join community discussions
+- [ ] Mentor other students
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions!
+
+- **Add external resources** - Found something great? Link it!
+- **Improve Frank's methods** - Better implementations welcome
+- **Fix issues** - Typos, broken links, clarifications
+- **Add workshops** - New topics following our format
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+---
+
+## 📜 License
+
+- **Documentation**: CC BY 4.0 (Share with attribution)
+- **Code**: MIT License
+- **Frank's Unique Methods**: See individual files
+
+---
+
+## 🌐 Website
+
+The full experience: **[frankx.ai/workshops](https://frankx.ai/workshops)**
+
+- Workshop catalog with learning paths
+- Progress tracking
+- Community features
+- Transformation stories
+
+---
+
+*Built by [FrankX](https://frankx.ai) - Transforming creators from tech-overwhelmed to AI-empowered.*
+
+**[Start Learning →](https://frankx.ai/workshops)**
